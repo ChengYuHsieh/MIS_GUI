@@ -1,20 +1,16 @@
-<nav class="navbar navbar-static-top navbar-inverse">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
-        <span class="glyphicon glyphicon-home"></span> Gulp Angular
+      <a class="navbar-brand" ui-sref="home">
+        SchedOpt
       </a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
-        <li class="active"><a ng-href="#">Home</a></li>
-        <li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right acme-navbar-text">
-        <li>Application was created {{ vm.relativeDate }}.</li>
+        <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
+        <!--<li><a ui-sref="#">LineChart</a></li>-->
+        <li ui-sref-active="active"><a ui-sref="gantt">GanttCchart</a></li>
       </ul>
     </div>
   </div>

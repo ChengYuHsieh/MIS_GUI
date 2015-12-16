@@ -3,10 +3,10 @@
 
   angular
     .module('misgui')
-    .controller('MainController', MainController);
+    .controller('GanttController', GanttController);
 
   /** @ngInject */
-  function MainController() {
+  function GanttController() {
     var vm = this;
 
   }
