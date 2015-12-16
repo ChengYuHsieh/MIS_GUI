@@ -22,7 +22,7 @@
 
       AmCharts.useUTC = true;
       $http.get('http://gdoggg2032.github.io/haha.json').then(function(res){
-        var chart = AmCharts.makeChart( id, {
+        var chart = AmCharts.makeChart(id, {
             "type": "gantt",
             "theme": "light",
             "marginRight": 70,
