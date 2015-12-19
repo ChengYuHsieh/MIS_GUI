@@ -12,35 +12,35 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
 
       .state('database', {
         url: '/database',
         templateUrl: 'app/database/database.html',
-        controller: 'DBController',
-        controllerAs: 'db'
+        controller: 'DatabaseController',
+        controllerAs: 'vm'
       })
 
       .state('scheduling', {
         url: '/scheduling',
         templateUrl: 'app/scheduling/scheduling.html',
         controller: 'SchedulingController',
-        controllerAs: 'scheduling'
+        controllerAs: 'vm'
       })
 
       .state('gantt', {
         url: '/gantt',
         templateUrl: 'app/gantt/gantt.html',
         controller: 'GanttController',
-        controllerAs: 'gantt'
+        controllerAs: 'vm'
       })
 
       .state('line', {
         url: '/line',
         templateUrl: 'app/line/line.html',
         controller: 'LineController',
-        controllerAs: 'line'
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/');

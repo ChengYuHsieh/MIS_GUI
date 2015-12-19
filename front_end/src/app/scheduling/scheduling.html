@@ -1,1 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="jumbotron text-left">
+                <div class="row">
+                    Check all
+                    <input type="checkbox" ng-click="vm.checkAllWeeks()" />
+                </div>
+                <div ng-repeat="week in vm.weeks">
+                    <div class="row">
+                        Week {{week.num}}
+                        <input type="checkbox" ng-model="week.sel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="jumbotron text-left">
+                <table ng-table="vm.tableParams" class="table" show-filter="true">
+                    <tr ng-repeat="user in vm.data">
+                        <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+                            {{user.name}}</td>
+                        <td title="'Age'" filter="{ age: 'number'}" sortable="'age'">
+                            {{user.age}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <button type="button" class='btn btn-default' ng-click="">Create Seasonal Schedule</button>
+
