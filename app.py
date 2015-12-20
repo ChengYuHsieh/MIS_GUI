@@ -57,10 +57,39 @@ class Flight(Base):
                 self.flightNum, self.airline, self.terminal, self.counter, self.gate)
 
 
-# class Employee(Base):
-    # id = db.Column(db.Integer, primary_key=True)
-    # name = db.Column(db.String(64), unique=True)
-    # email = db.Column(db.String(128))
+class Seasonal_schedule(Base):
+    __tablename__ = 'seasonal_schedule'
+
+    id = Column(Integer, primary_key=True)
+    skillNum = Column(Integer)
+    classNum = Column(Integer)
+    numAssigned = Column(Integer)
+
+    def __init__(self, skillNum=0, classNum=0, numAssigned=0):
+        self.skillNum = skillNum
+        self.classNum = classNum
+        self.numAssigned = numAssigned
+
+    def __repr__(self):
+        return "<Seasonal_schedule('%s', '%s', '%s')>" % (
+                self.skillNum, self.classNum, self.numAssigned)
+
+class Daily_schedule(Base):
+    __tablename__ = 'daily_schedule'
+
+    id = Column(Integer, primary_key=True)
+    skillNum = Column(Integer)
+    classNum = Column(Integer)
+    numAssigned = Column(Integer)
+
+    def __init__(self, skillNum=0, classNum=0, numAssigned=0):
+        self.skillNum = skillNum
+        self.classNum = classNum
+        self.numAssigned = numAssigned
+
+    def __repr__(self):
+        return "<Seasonal_schedule('%s', '%s', '%s')>" % (
+                self.skillNum, self.classNum, self.numAssigned)
 
 
 ### Route
@@ -68,6 +97,24 @@ class Flight(Base):
 def index():
     return send_file('front_end/dist/index.html')
 
+@app.route("/api/database/seasonal_schedule")
+def api_seasonal_schedule():
+    data = []
+    for row in session.query(Seasonal_schedule).order_by(Seasonal_schedule.id).all():
+        data.append({
+            'id': row.id,
+            'skillNum': row.skillNum,
+            'classNum': row.classNum,
+            'numAssigned': row.numAssigned
+        })
+    return json.dumps(data)
+
+@app.route("/api/database/daily_schedule")
+def api_daily_schedule():
+    data = []
+
+
+### testing API
 @app.route("/api/database/test")
 def db_test():
     rows = session.query(Flight).all()
@@ -78,5 +125,7 @@ def db_test():
 
 if __name__ == "__main__":
     admin.add_view(ModelView(Flight, session))
+    admin.add_view(ModelView(Seasonal_schedule, session))
+    admin.add_view(ModelView(Daily_schedule, session))
     Base.metadata.create_all(engine)
     app.run(debug=True)
