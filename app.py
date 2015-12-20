@@ -1,7 +1,7 @@
 import os
+import json
 from flask import Flask
 from flask import send_file
-from flask import jsonify
 from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin.contrib.sqla import ModelView
@@ -16,6 +16,11 @@ STATIC_FOLDER = os.path.join(os.getcwd(), 'front_end/dist')
 app = Flask(__name__, static_folder=STATIC_FOLDER, static_url_path='')
 app.secret_key = "super secret key"
 admin = Admin(app, name='Database', template_mode='bootstrap3')
+
+### temporary allow CORS, should remove on production
+from flask.ext.cors import CORS
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+###
 
 ### connecting database
 engine = create_engine('postgresql://daniel:daniel@localhost/CI')
@@ -68,7 +73,8 @@ def db_test():
     rows = session.query(Flight).all()
     rows = str(rows[0])
     print rows
-    return jsonify({'hello':'world'})
+    return json.dumps([{"name": "Moroni", 'age': 50}, {'name':"Daniel", 'age': 22}, {'name': "No", 'age': 10}])
+
 
 if __name__ == "__main__":
     admin.add_view(ModelView(Flight, session))
