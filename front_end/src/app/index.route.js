@@ -15,17 +15,24 @@
         controllerAs: 'vm'
       })
 
-      .state('database', {
-        url: '/database',
-        templateUrl: 'app/database/database.html',
-        controller: 'DatabaseController',
-        controllerAs: 'vm'
-      })
+      //.state('database', {
+        //url: '/database',
+        //templateUrl: 'app/database/database.html',
+        //controller: 'DatabaseController',
+        //controllerAs: 'vm'
+      //})
 
       .state('scheduling', {
         url: '/scheduling',
         templateUrl: 'app/scheduling/scheduling.html',
         controller: 'SchedulingController',
+        controllerAs: 'vm'
+      })
+
+      .state('seasonal_schedule', {
+        url: '/seasonal_schedule',
+        templateUrl: 'app/seasonal_schedule/seasonal_schedule.html',
+        controller: 'SeasonalScheduleController',
         controllerAs: 'vm'
       })
 

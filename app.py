@@ -78,18 +78,13 @@ class Daily_schedule(Base):
     __tablename__ = 'daily_schedule'
 
     id = Column(Integer, primary_key=True)
-    skillNum = Column(Integer)
-    classNum = Column(Integer)
-    numAssigned = Column(Integer)
+    schedule = Column(String(256))
 
-    def __init__(self, skillNum=0, classNum=0, numAssigned=0):
-        self.skillNum = skillNum
-        self.classNum = classNum
-        self.numAssigned = numAssigned
+    def __init__(self, schedule=''):
+        self.schedule = schedule
 
     def __repr__(self):
-        return "<Seasonal_schedule('%s', '%s', '%s')>" % (
-                self.skillNum, self.classNum, self.numAssigned)
+        return "<Daily_schedule('%s')>" % (self.schedule)
 
 
 ### Route
@@ -112,6 +107,9 @@ def api_seasonal_schedule():
 @app.route("/api/database/daily_schedule")
 def api_daily_schedule():
     data = []
+    for row in session.query(Daily_schedule).order_by(Daily_schedule.id).all():
+        data.append(json.loads(row.schedule))
+    return json.dumps(data)
 
 
 ### testing API
