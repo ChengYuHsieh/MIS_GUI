@@ -111,6 +111,13 @@ def api_daily_schedule():
         data.append(json.loads(row.schedule))
     return json.dumps(data)
 
+@app.route("/api/database/linechart")
+def api_linechart():
+    data = [
+    ['data1', 30, 200, 100, 400, 150, 250],
+    ['data2', 50, 20, 10, 40, 15, 25]
+    ]
+    return json.dumps(data)
 
 ### testing API
 @app.route("/api/database/test")
