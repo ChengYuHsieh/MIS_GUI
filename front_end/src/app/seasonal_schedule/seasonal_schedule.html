@@ -3,8 +3,9 @@
             <div class="jumbotron text-left">
                 <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
                     <tr ng-repeat="row in $data">
-                        <td data-title="'Name'" sortable="'name'" filter="{name: 'text'}">{{row.name}}</td>
-                        <td data-title="'Age'" sortable="'age'" filter="{age: 'number'}">{{row.age}}</td>
+                        <td data-title="'SkillNum'" sortable="'skillNum'" filter="{skillNum: 'number'}">{{row.skillNum}}</td>
+                        <td data-title="'ClassNum'" sortable="'classNum'" filter="{classNum: 'number'}">{{row.classNum}}</td>
+                        <td data-title="'NumAssigned'" sortable="'numAssigned'" filter="{numAssigned: 'number'}">{{row.numAssigned}}</td>
                     </tr>
                 </table>
             </div>

@@ -89,6 +89,14 @@
         //var page = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
         //$defer.resolve(page);
     //}});
+    vm.isProcessing = false;
+    vm.newSeasonalSched = function(){
+        vm.isProcessing = true
+        //$http.get("http://localhost:5000/api/create/seasonalSchedule").then(function(res){
+        //})
+    }
+    vm.progressMax = 100;
+    vm.progress = 50;
   }
 })();
 

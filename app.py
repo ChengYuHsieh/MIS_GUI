@@ -92,6 +92,10 @@ class Daily_schedule(Base):
 def index():
     return send_file('front_end/dist/index.html')
 
+@app.route("/api/create/seasonal_schedule")
+def api__create_seasonal_schedule():
+   pass 
+
 @app.route("/api/database/seasonal_schedule")
 def api_seasonal_schedule():
     data = []

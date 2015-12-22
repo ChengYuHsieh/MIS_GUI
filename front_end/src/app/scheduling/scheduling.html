@@ -1,5 +1,10 @@
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-offset-3 col-md-6" ng-show="vm.isProcessing">
+            <progressbar class="progress-striped active" value="vm.progress" max="vm.progressMax">{{vm.progress}} / {{vm.progressMax}}</progressbar>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-2">
             <div class="jumbotron text-left">
                 <div class="row">
@@ -13,6 +18,7 @@
                     </div>
                 </div>
             </div>
+            <button type="button" class='btn btn-default' ng-click="vm.newSeasonalSched()">Create Seasonal Schedule</button>
         </div>
         <div class="col-md-10">
             <div class="jumbotron text-left">
@@ -27,7 +33,4 @@
     </div>
 </div>
 
-
-
-<button type="button" class='btn btn-default' ng-click="">Create Seasonal Schedule</button>
 
