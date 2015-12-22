@@ -22,6 +22,12 @@
             $defer.resolve(page);
         }});
     })   
+    vm.isProcessing = false;
+    vm.progressMax = 100;
+    vm.progress = 50;
+    vm.newDailySched = function(){
+        vm.isProcessing = true;
+    };
   }
 })();
 

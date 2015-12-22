@@ -1,5 +1,11 @@
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-offset-3 col-md-6" ng-show="vm.isProcessing">
+            <progressbar class="progress-striped active" value="vm.progress" max="vm.progressMax">{{vm.progress}} / {{vm.progressMax}}</progressbar>
+        </div>
+    </div>
+
+    <div class="row">
             <div class="jumbotron text-left">
                 <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
                     <tr ng-repeat="row in $data">
@@ -8,6 +14,7 @@
                         <td data-title="'NumAssigned'" sortable="'numAssigned'" filter="{numAssigned: 'number'}">{{row.numAssigned}}</td>
                     </tr>
                 </table>
+                <button type="button" class='btn btn-primary' ng-click="vm.newDailySched()">Create Daily Schedule</button>
             </div>
     </div>
 </div>
