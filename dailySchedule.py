@@ -67,9 +67,9 @@ class dayschedule:
 			if len(emp.dutyList) != 0:
 				for work in emp.dutyList:
 					d = {}
-					d['start'] = work.start * 15
-					d['starttime'] = str(work.start / 4) + ':' + str(work.start % 4 * 15)
-					d['duration'] = work.time * 15
+					d['start'] = work.start * 15/60
+					# d['starttime'] = str(work.start / 4) + ':' + str(work.start % 4 * 15)
+					d['duration'] = work.time * 15/60
 					d['color'] = PriorColorDict[work.priority]
 					d['task'] = work.id
 					segList.append(d)
@@ -81,13 +81,18 @@ class dayschedule:
 		sumDuty = [0 for i in range(len(self.emplist[0].empSlot))]
 		sumRemained = [0 for i in range(len(self.emplist[0].empSlot))]
 		for emp in self.emplist:
-			sumEmp = list(np.add(sumEmp, emp.empSlot))
+			Emp = [1 if time > 0 else 0 for time in emp.empSlot]
+			sumEmp = list(np.add(sumEmp, Emp))
+			remain = [1 if time > 1 else 0 for time in emp.empSlot]
+			sumRemained = list(np.add(sumRemained, remain))
 		for duty in self.dutylist:
 			sumDuty = list(np.add(sumDuty, duty.demandSlot))
-		sumRemained = list(np.subtract(sumEmp, sumDuty))
+		sumDuty = ['Demand'] + sumDuty
+		sumEmp = ['Supply'] + sumEmp
+		sumRemained = ['At work'] + sumRemained
 		chart = []
-		chart.append(sumEmp)
 		chart.append(sumDuty)
+		chart.append(sumEmp)
 		chart.append(sumRemained)
 		return chart
 	def needMoving(self, duty, emp):
@@ -201,7 +206,6 @@ class dayschedule:
 			self.dutyAssign(dutyAssigned, self.emplist[empid])	
 	
 	def greedy(self):
-		chart = self.chart()
 		self.lastAssignList = []
 		for duty in self.dutylist:
 			start = duty.start
@@ -248,6 +252,7 @@ class dayschedule:
 		#Remain duty can not be divided completely
 		for duty in self.lastAssignList:
 			self.dutydivide(duty, self.emplist)
+		chart = self.chart()
 		data = self.JsonGene()
 		# print data, chart
 		return data, chart
@@ -291,3 +296,4 @@ def Greedy(dutylist, emplist):
 	# 		print duty.id, duty.terminal, duty.demandSlot
 	return data, chart
 # output1, output2 = Greedy(dutylist, emplist)
+# print output1, output2

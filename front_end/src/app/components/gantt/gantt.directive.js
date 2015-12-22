@@ -21,24 +21,24 @@
       var id = $el[0].id;
 
       AmCharts.useUTC = true;
-      $http.get('http://gdoggg2032.github.io/haha.json').then(function(res){
+      $http.get("http://localhost:5000/api/database/ganttchart").then(function(res){
         var chart = AmCharts.makeChart(id, {
             "type": "gantt",
             "theme": "light",
             "marginRight": 70,
-            "period": "hh",
+            "period": "mm",
             "dataDateFormat":"YYYY-MM-DD",
             "balloonDateFormat": "JJ:NN",
             "columnWidth": 0.5,
             "valueAxis": {
                 "type": "date",
-                "minimum": 7,
-                "maximum": 31
+                "minimum": 0,
+                "maximum": 1500
             },
             "brightnessStep": 10,
             "graph": {
                 "fillAlphas": 1,
-                "balloonText": "<b>[[task]]</b>: [[open]] [[value]]"
+                "balloonText": "<b>[[task]]</b>: [[open]] [[category]]"
             },
             "rotate": true,
             "categoryField": "category",

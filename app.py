@@ -92,7 +92,7 @@ class Daily_schedule(Base):
 def index():
     return send_file('front_end/dist/index.html')
 
-@app.route("/api/create/seasonal_schedule")
+@app.route("/api/create/seasonal_schedule", methods=['POST'])
 def api__create_seasonal_schedule():
    pass 
 
@@ -117,19 +117,23 @@ def api_daily_schedule():
 
 @app.route("/api/database/linechart")
 def api_linechart():
-    data = [
-    ['data1', 30, 200, 100, 400, 150, 250],
-    ['data2', 50, 20, 10, 40, 15, 25]
-    ]
-    return json.dumps(data)
+    return send_file('linechart.json')
+
+@app.route("/api/database/ganttchart")
+def api_ganttchart():
+    return send_file('gantt.json')
+
+@app.route("/api/create/daily_schedule", methods=['POST'])
+def api_create_daily_schedule():
+    pass
 
 ### testing API
-@app.route("/api/database/test")
-def db_test():
-    rows = session.query(Flight).all()
-    rows = str(rows[0])
-    print rows
-    return json.dumps([{"name": "Moroni", 'age': 50}, {'name':"Daniel", 'age': 22}, {'name': "No", 'age': 10}])
+# @app.route("/api/database/test")
+# def db_test():
+    # rows = session.query(Flight).all()
+    # rows = str(rows[0])
+    # print rows
+    # return json.dumps([{"name": "Moroni", 'age': 50}, {'name':"Daniel", 'age': 22}, {'name': "No", 'age': 10}])
 
 
 if __name__ == "__main__":
