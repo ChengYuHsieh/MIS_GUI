@@ -1,7 +1,6 @@
 import os
 import json
-from flask import Flask
-from flask import send_file
+from flask import Flask, send_file, request, redirect
 from flask_admin import Admin, AdminIndexView
 from flask.ext.admin.base import MenuLink, Admin, BaseView, expose
 from flask_sqlalchemy import SQLAlchemy
@@ -158,7 +157,15 @@ def api_ganttchart():
 def api_create_daily_schedule():
     pass
 
-### testing API
+@app.route("/api/import/csv/demand", methods=['POST'])
+def api_import_csv():
+    if request.method == 'POST':
+        print 'uploading CSV'
+        request.files['upload'].save("uploads/demand.csv")
+        return redirect("/admin")
+    return redirect("/admin")
+
+    ### testing API
 # @app.route("/api/database/test")
 # def db_test():
     # rows = session.query(Flight).all()

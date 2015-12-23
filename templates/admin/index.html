@@ -4,8 +4,26 @@
 <div class="row-fluid">
     <h1>Scheduling Optimization Database</h1>
     <p class="lead">
-        View all the database records
+        View all database records, and importing files into database
     </p>
-    <a class="btn btn-primary" href="/">Back Home</a>
+    <hr>
+    <!--<a class="btn btn-primary" href="/">Back Home</a>-->
+    <h4>
+        Import CSV files into database
+    </h4>
+    <form method="POST" enctype="multipart/form-data" action="/api/import/csv/demand">
+        <label>Select the target table</label>
+        <select>
+            <option value="flight">Flight</option>
+            <option value="employee">Employee</option>
+            <option value="demand">Demand</option>
+        </select>
+        <br>
+        <label>CSV file to import</label>
+        <input name="upload" type="file">
+        <button class="btn btn-primary" type="submit" style="margin-top:5px;">Upload</button>
+    </form>
+
 </div>
+
 {% endblock body %}
