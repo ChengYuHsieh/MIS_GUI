@@ -2,7 +2,8 @@ import os
 import json
 from flask import Flask
 from flask import send_file
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
+from flask.ext.admin.base import MenuLink, Admin, BaseView, expose
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin.contrib.sqla import ModelView
 from sqlalchemy import create_engine
@@ -15,7 +16,7 @@ STATIC_FOLDER = os.path.join(os.getcwd(), 'front_end/dist')
 
 app = Flask(__name__, static_folder=STATIC_FOLDER, static_url_path='')
 app.secret_key = "super secret key"
-admin = Admin(app, name='Database', template_mode='bootstrap3')
+admin = Admin(app, name='Database', template_mode='bootstrap3', index_view=AdminIndexView(name='Index'))
 
 ### temporary allow CORS, should remove on production
 from flask.ext.cors import CORS
@@ -86,6 +87,14 @@ class Daily_schedule(Base):
     def __repr__(self):
         return "<Daily_schedule('%s')>" % (self.schedule)
 
+class Demand(Base):
+    __tablename__ = 'Demand'
+
+    id = Column(Integer, primary_key=True)
+    period = Column(Integer)
+    demand = Column(Integer)
+    week = Column(Integer)
+
 
 ### Route
 @app.route("/")
@@ -93,8 +102,30 @@ def index():
     return send_file('front_end/dist/index.html')
 
 @app.route("/api/create/seasonal_schedule", methods=['POST'])
-def api__create_seasonal_schedule():
-   pass 
+def api_create_seasonal_schedule():
+    import Schedule_switcher_demo as SS
+
+    [WAs, WAm] = SS.main()
+    numS = len(WAs)
+    numM = len(WAm)
+
+    for i in range(numS):
+        for j in range(len(WAs[i])):
+            if WAs[i, j] != 0:
+                record = Seasonal_schedule(i+1, j+1, WAs[i, j])
+                session.add(record)
+
+    for i in range(numM):
+        for j in range(len(WAm[i])):
+            if WAm[i, j] != 0:
+                record = Seasonal_schedule(numS+i+1, j+1, WAm[i, j])
+                session.add(record)
+    
+    session.commit()
+    return "success", 200
+
+
+
 
 @app.route("/api/database/seasonal_schedule")
 def api_seasonal_schedule():
@@ -135,10 +166,11 @@ def api_create_daily_schedule():
     # print rows
     # return json.dumps([{"name": "Moroni", 'age': 50}, {'name':"Daniel", 'age': 22}, {'name': "No", 'age': 10}])
 
-
 if __name__ == "__main__":
     admin.add_view(ModelView(Flight, session))
     admin.add_view(ModelView(Seasonal_schedule, session))
     admin.add_view(ModelView(Daily_schedule, session))
+    admin.add_view(ModelView(Demand, session))
+    admin.add_link(MenuLink(name='Back Home', url='/'))
     Base.metadata.create_all(engine)
     app.run(debug=True)
