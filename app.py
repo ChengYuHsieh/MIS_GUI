@@ -165,13 +165,18 @@ def api_import_csv():
         return redirect("/admin")
     return redirect("/admin")
 
-    ### testing API
-# @app.route("/api/database/test")
-# def db_test():
-    # rows = session.query(Flight).all()
-    # rows = str(rows[0])
-    # print rows
-    # return json.dumps([{"name": "Moroni", 'age': 50}, {'name':"Daniel", 'age': 22}, {'name': "No", 'age': 10}])
+@app.route("/api/database/demand")
+def api_demand():
+    data = []
+    for row in session.query(Demand).order_by(Demand.id).all():
+        data.append({
+            'id': row.id,
+            'period': row.period,
+            'demand': row.demand,
+            'week': row.week
+        })
+    return json.dumps(data)
+    
 
 if __name__ == "__main__":
     admin.add_view(ModelView(Flight, session))

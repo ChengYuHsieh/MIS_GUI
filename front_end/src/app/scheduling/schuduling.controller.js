@@ -66,10 +66,11 @@
         });
     }
 
-    $http.get("/api/database/test").then(function(res){
+    $http.get("/api/database/demand").then(function(res){
         vm.data = res.data;
-        vm.tableParams = new NgTableParams({count: 1, page: 1}, 
-            { total: 3, counts: [], getData: function($defer, params){
+        var datalen = res.data.length;
+        vm.tableParams = new NgTableParams({count: 20, page: 1}, 
+            { total: datalen, counts: [], getData: function($defer, params){
             var filteredData = params.filter() ?
                 $filter('filter')(vm.data, params.filter()) : vm.data;
 

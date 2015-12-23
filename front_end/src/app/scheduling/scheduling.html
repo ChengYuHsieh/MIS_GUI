@@ -24,8 +24,9 @@
             <div class="jumbotron text-left">
                 <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
                     <tr ng-repeat="row in $data">
-                        <td data-title="'Name'" sortable="'name'" filter="{name: 'text'}">{{row.name}}</td>
-                        <td data-title="'Age'" sortable="'age'" filter="{age: 'number'}">{{row.age}}</td>
+                        <td data-title="'Period'" sortable="'period'" filter="{period: 'number'}">{{row.period}}</td>
+                        <td data-title="'Demand'" sortable="'demand'" filter="{demand: 'number'}">{{row.demand}}</td>
+                        <td data-title="'Week'" sortable="'week'" filter="{week: 'number'}">{{row.week}}</td>
                     </tr>
                 </table>
             </div>
