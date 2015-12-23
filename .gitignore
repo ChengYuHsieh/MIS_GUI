@@ -6,3 +6,4 @@ front_end/.idea/
 front_end/.tmp/
 front_end/dist/
 back_end/.ropeproject/
+*.pyc
