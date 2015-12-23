@@ -21,7 +21,7 @@
       var id = $el[0].id;
 
       AmCharts.useUTC = true;
-      $http.get("http://localhost:5000/api/database/ganttchart").then(function(res){
+      $http.get("/api/database/ganttchart").then(function(res){
         var chart = AmCharts.makeChart(id, {
             "type": "gantt",
             "theme": "light",

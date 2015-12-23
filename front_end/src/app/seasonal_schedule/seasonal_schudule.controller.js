@@ -9,7 +9,7 @@
   function SeasonalScheduleController($filter, $http, NgTableParams) {
     var vm = this;
 
-    $http.get("http://localhost:5000/api/database/seasonal_schedule").then(function(res){
+    $http.get("/api/database/seasonal_schedule").then(function(res){
         vm.data = res.data;
         var datalen = res.data.length;
         vm.tableParams = new NgTableParams({count: 20, page: 1}, 
