@@ -15,7 +15,12 @@
                         <td data-title="'NumAssigned'" sortable="'numAssigned'" filter="{numAssigned: 'number'}">{{row.numAssigned}}</td>
                     </tr>
                 </table>
-                <button type="button" class='btn btn-primary' ng-click="vm.newDailySched()">Create Daily Schedule</button>
+                <div style="display:inline-block; min-height:290px;">
+                  <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+                </div>
+                <div class="row">
+                    <button type="button" class='btn btn-primary' ng-click="vm.newDailySched()" style="margin-left:20px;">Create Daily Schedule</button>
+                </div>
             </div>
     </div>
 </div>
