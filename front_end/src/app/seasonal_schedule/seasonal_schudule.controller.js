@@ -3,10 +3,10 @@
 
   angular
     .module('misgui')
-    .controller('SeasonalScheduleController', ['$filter', '$http', 'NgTableParams', SeasonalScheduleController]);
+    .controller('SeasonalScheduleController', ['$filter', '$http', 'NgTableParams', '$interval', SeasonalScheduleController]);
 
   /** @ngInject */
-  function SeasonalScheduleController($filter, $http, NgTableParams) {
+  function SeasonalScheduleController($filter, $http, NgTableParams, $interval) {
     var vm = this;
 
     $http.get("/api/database/seasonal_schedule").then(function(res){
@@ -25,10 +25,20 @@
     })   
     vm.isProcessing = false;
     vm.progressMax = 100;
-    vm.progress = 50;
+    vm.progress = 0;
     vm.newDailySched = function(){
+        vm.progress = 0;
         vm.isProcessing = true;
+        var stop = $interval(function(){
+            if(vm.progress<100){
+                vm.progress+=20
+            }
+        }, 1000);
     };
+    vm.closeAlert = function(){
+       vm.alerts.splice(0, 1); 
+    };
+    vm.alerts = [{type: 'success', msg: 'Daily Schedule completed!'}];
   }
 })();
 

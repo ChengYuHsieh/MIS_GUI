@@ -3,10 +3,10 @@
 
   angular
     .module('misgui')
-    .controller('SchedulingController', ['$filter', '$http', 'NgTableParams', SchedulingController]);
+    .controller('SchedulingController', ['$filter', '$http', 'NgTableParams', '$interval', SchedulingController]);
 
   /** @ngInject */
-  function SchedulingController($filter, $http, NgTableParams) {
+  function SchedulingController($filter, $http, NgTableParams, $interval) {
     var vm = this;
     vm.weeks = [
     {
@@ -82,12 +82,20 @@
     })   
     vm.isProcessing = false;
     vm.newSeasonalSched = function(){
-        vm.isProcessing = true
-        $http.post("/api/create/seasonalSchedule").then(function(res){ 
-        })
+        vm.isProcessing = true;
+        vm.progress = 0;
+        $interval(function(){if(vm.progress<100)vm.progress+=2}, 1000);
+        //$http.post("/api/create/seasonalSchedule").then(function(res){ 
+        //})
     }
     vm.progressMax = 100;
-    vm.progress = 50;
+    vm.progress = 0;
+    vm.closeAlert = function(){
+       vm.alerts.splice(0, 1); 
+    };
+    vm.alerts = [{type: 'success', msg: 'Seasonal Schedule completed!'}];
+    
+
   }
 })();
 

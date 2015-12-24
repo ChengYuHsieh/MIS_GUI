@@ -5,10 +5,13 @@
       Large Scale Mutiple Locations Staff Scheduling System
       </h3>
   </div>
-
-  <carousel interval="myInterval" no-wrap="noWrapSlides">
-      <slide ng-repeat="slide in vm.slides" active="slide.active">
-        <img ng-src="{{slide.image}}" style="margin:auto;">
-      </slide>
-    <carousel>
+  <!--<div class="row">-->
+    <!--<div class="col-md-offset-2 col-md-8">-->
+        <carousel interval="vm.myInterval" no-wrap="noWrapSlides">
+          <slide ng-repeat="slide in vm.slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="margin:auto; height: 700px; width:100%">
+          </slide>
+        </carousel>
+    <!--</div>-->
+  <!--</row>-->
 </div>

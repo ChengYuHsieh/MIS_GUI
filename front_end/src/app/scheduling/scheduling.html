@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-offset-3 col-md-6" ng-show="vm.isProcessing">
+        <alert ng-if="vm.progress==100" ng-repeat="alert in vm.alerts" dismiss-on-timeout="10000" close="vm.closeAlert()">{{alert.msg}}</alert>
+        <div class="col-md-offset-3 col-md-6" ng-show="vm.isProcessing && vm.progress!=100">
             <progressbar class="progress-striped active" value="vm.progress" max="vm.progressMax">{{vm.progress}} / {{vm.progressMax}}</progressbar>
         </div>
     </div>
