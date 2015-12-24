@@ -80,21 +80,11 @@
             $defer.resolve(page);
         }});
     })   
-    //vm.data = [{name: "Moroni", age: 50}, {name:"Daniel", age: 22}, {name: "No", age: 10}];
-    //vm.tableParams = new NgTableParams({count: 1, page: 1}, { total: 3, counts: [], getData: function($defer, params){
-        //var filteredData = params.filter() ?
-            //$filter('filter')(vm.data, params.filter()) : vm.data;
-
-        //var orderedData = params.sorting() ?
-            //$filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-        //var page = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        //$defer.resolve(page);
-    //}});
     vm.isProcessing = false;
     vm.newSeasonalSched = function(){
         vm.isProcessing = true
-        //$http.get("http://localhost:5000/api/create/seasonalSchedule").then(function(res){
-        //})
+        $http.post("/api/create/seasonalSchedule").then(function(res){ 
+        })
     }
     vm.progressMax = 100;
     vm.progress = 50;

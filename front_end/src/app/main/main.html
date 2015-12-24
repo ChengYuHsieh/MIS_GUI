@@ -6,7 +6,9 @@
       </h3>
   </div>
 
-  <div class="row">
-  </div>
-
+  <carousel interval="myInterval" no-wrap="noWrapSlides">
+      <slide ng-repeat="slide in vm.slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+      </slide>
+    <carousel>
 </div>
