@@ -10,9 +10,9 @@
     var vm = this;
     vm.myInterval = 5000;
     vm.slides = [
-        {image: 'assets/images/airplane.png'},
-        {image: 'assets/images/airplane1.png'},
-        {image: 'assets/images/airplane2.png'}
+        {image: 'assets/images/slide.png'},
+        {image: 'assets/images/slide1.png'},
+        //{image: 'assets/images/airplane2.png'}
     ]
 
   }
